@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Tittle</title>
+</head>
+<body>
+    <h1>FLight Booking </h1>
+    <h3>{{ flight.flight_name }}</h3>
+    <p>{{flight.source}} to {{flight.destination}}</p>
+    <p>Price: ₹{{ flight.price }}</p>
+
+    <form method="POST">
+
+        {% csrf_token %}
+
+        <input type="text"
+               name="passenger_name"
+               placeholder="Enter Name">
+
+        <br><br>
+
+        <input type="email"
+               name="passenger_email"
+               placeholder="Enter Email">
+
+        <br><br>
+
+        <button type="submit">
+            Confirm Booking
+        </button>
+
+    </form>
+</body>
+</html>
