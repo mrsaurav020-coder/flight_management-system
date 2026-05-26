@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1 style="
+text-align:center;
+margin-bottom:40px;
+">
+
+    My Booking History
+
+</h1>
+
+<div style="
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+gap:30px;
+">
+
+    {% for booking in bookings %}
+
+    <div class="glass-box"
+         style="
+         width:320px;
+         text-align:center;
+         ">
+
+        <h2>{{ booking.flight.flight_name }}</h2>
+
+        <p>
+            {{ booking.flight.source }}
+            →
+            {{ booking.flight.destination }}
+        </p>
+
+        <p>
+            Passenger:
+            {{ booking.passenger_name }}
+        </p>
+
+        <p>
+            Email:
+            {{ booking.passenger_email }}
+        </p>
+
+        <p>
+            Price:
+            ₹{{ booking.flight.price }}
+        </p>
+
+    </div>
+
+    {% endfor %}
+
+</div>
+
+{% endblock %}

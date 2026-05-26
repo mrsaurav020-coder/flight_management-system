@@ -1,30 +1,61 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flight Management System</title>
-</head>
-<body>
+{% extends 'base.html' %}
 
-    <nav>
-        <a href="/">Home</a>
-        <a href="#">Flights</a>
-        <a href="#">Booking History</a>
-        <a href="#">Login</a>
-    </nav>
-    <hr>
-    <h1>Available Flights</h1>
+{% block content %}
+
+<h1 style="text-align:center; margin-bottom:50px;">
+
+    Welcome to Flight Management System
+
+</h1>
+
+<div style="
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+gap:30px;
+">
+
     {% for flight in flights %}
-        <h3>{{ flight.flight_name }}</h3>
+
+    <div class="glass-box" style="width:300px; text-align:center;">
+
+        <h2>{{ flight.flight_name }}</h2>
+
         <p>
-            {{flight.source}} to {{flight.destination}} 
+            {{ flight.source }} → {{ flight.destination }}
         </p>
-        <p>Date: {{flight.date}}</p>
-        <p>Time: {{flight.time}}</p>
-        <p>Price: ₹{{flight.price}}</p>
-        <a href="/book/{{ flight.id }}">Book Now</a>
-        <hr>
+
+        <p>
+            Departure:
+            {{ flight.departure_time }}
+        </p>
+
+        <p>
+            Arrival:
+            {{ flight.arrival_time }}
+        </p>
+
+        <p>Price: ₹{{ flight.price }}</p>
+
+        <a href="/book/{{ flight.id }}/"
+           style="
+           display:inline-block;
+           margin-top:15px;
+           padding:10px 20px;
+           background:black;
+           color:white;
+           text-decoration:none;
+           border-radius:10px;
+           ">
+
+           Book Now
+
+        </a>
+
+    </div>
+
     {% endfor %}
-</body>
-</html>
+
+</div>
+
+{% endblock %}

@@ -1,31 +1,67 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-</head>
-<body>
-    <h1>User Login</h1>
-    <form method="POST">
-        {% csrf_token %}
-         <input type="text"
-               name="username"
-               placeholder="Enter Username">
+{% extends 'base.html' %}
 
-        <br><br>
+{% block content %}
 
-        <input type="password"
-               name="password"
-               placeholder="Enter Password">
+<div style="
+display:flex;
+justify-content:center;
+align-items:center;
+height:70vh;
+">
 
-        <br><br>
+    <div class="glass-box" style="width:400px;">
 
-        <button type="submit">
+        <h1 style="text-align:center; margin-bottom:30px;">
             Login
-        </button>
+        </h1>
 
-    </form>
+        <form method="POST">
 
-</body>
-</html>
+            {% csrf_token %}
+
+            <input type="text"
+                   name="username"
+                   placeholder="Enter Username"
+                   required
+                   style="
+                   width:100%;
+                   padding:12px;
+                   margin-bottom:20px;
+                   border:none;
+                   border-radius:10px;
+                   ">
+
+            <input type="password"
+                   name="password"
+                   placeholder="Enter Password"
+                   required
+                   style="
+                   width:100%;
+                   padding:12px;
+                   margin-bottom:20px;
+                   border:none;
+                   border-radius:10px;
+                   ">
+
+            <button type="submit"
+                    style="
+                    width:100%;
+                    padding:12px;
+                    border:none;
+                    border-radius:10px;
+                    background:black;
+                    color:white;
+                    font-size:18px;
+                    ">
+
+                Login
+
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}

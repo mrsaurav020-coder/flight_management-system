@@ -1,36 +1,94 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Book Tittle</title>
-</head>
-<body>
-    <h1>FLight Booking </h1>
-    <h3>{{ flight.flight_name }}</h3>
-    <p>{{flight.source}} to {{flight.destination}}</p>
-    <p>Price: ₹{{ flight.price }}</p>
+{% extends 'base.html' %}
 
-    <form method="POST">
+{% block content %}
 
-        {% csrf_token %}
+<div style="
+display:flex;
+justify-content:center;
+align-items:center;
+height:80vh;
+">
 
-        <input type="text"
-               name="passenger_name"
-               placeholder="Enter Name">
+    <div class="glass-box"
+         style="
+         width:450px;
+         ">
 
-        <br><br>
+        <h1 style="
+        text-align:center;
+        margin-bottom:30px;
+        ">
 
-        <input type="email"
-               name="passenger_email"
-               placeholder="Enter Email">
+            Book Flight
 
-        <br><br>
+        </h1>
 
-        <button type="submit">
-            Confirm Booking
-        </button>
+        <h2 style="margin-bottom:20px;">
 
-    </form>
-</body>
-</html>
+            {{ flight.flight_name }}
+
+        </h2>
+
+        <p>
+            {{ flight.source }}
+            →
+            {{ flight.destination }}
+        </p>
+
+        <p style="margin-bottom:20px;">
+
+            Price:
+            ₹{{ flight.price }}
+
+        </p>
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+            <input type="text"
+                   name="passenger_name"
+                   placeholder="Enter Name"
+                   required
+                   style="
+                   width:100%;
+                   padding:12px;
+                   margin-bottom:20px;
+                   border:none;
+                   border-radius:10px;
+                   ">
+
+            <input type="email"
+                   name="passenger_email"
+                   placeholder="Enter Email"
+                   required
+                   style="
+                   width:100%;
+                   padding:12px;
+                   margin-bottom:20px;
+                   border:none;
+                   border-radius:10px;
+                   ">
+
+            <button type="submit"
+                    style="
+                    width:100%;
+                    padding:12px;
+                    border:none;
+                    border-radius:10px;
+                    background:black;
+                    color:white;
+                    font-size:18px;
+                    ">
+
+                Confirm Booking
+
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}
