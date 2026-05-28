@@ -10,6 +10,7 @@ class Flight(models.Model):
     price = models.IntegerField()
     departure_time = models.CharField(max_length=20)
     arrival_time = models.CharField(max_length=20)
+    available_seats = models.IntegerField(default=50)
 
     def __str__(self):
         return self.flight_name

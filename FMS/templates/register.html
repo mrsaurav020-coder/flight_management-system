@@ -10,43 +10,24 @@ height:80vh;
 ">
 
     <div class="glass-box"
-         style="
-         width:450px;
-         ">
+         style="width:400px;">
 
         <h1 style="
         text-align:center;
         margin-bottom:30px;
         ">
 
-            Book Flight
+            Register
 
         </h1>
-
-        <h2 style="margin-bottom:20px;">
-
-            {{ flight.flight_name }}
-
-        </h2>
-
-        <p>
-            {{ flight.source }} to {{ flight.destination }}
-        </p>
-
-        <p style="margin-bottom:20px;">
-
-            Price:
-            ₹{{ flight.price }}
-
-        </p>
 
         <form method="POST">
 
             {% csrf_token %}
 
             <input type="text"
-                   name="passenger_name"
-                   placeholder="Enter Name"
+                   name="username"
+                   placeholder="Enter Username"
                    required
                    style="
                    width:100%;
@@ -57,8 +38,20 @@ height:80vh;
                    ">
 
             <input type="email"
-                   name="passenger_email"
+                   name="email"
                    placeholder="Enter Email"
+                   required
+                   style="
+                   width:100%;
+                   padding:12px;
+                   margin-bottom:20px;
+                   border:none;
+                   border-radius:10px;
+                   ">
+
+            <input type="password"
+                   name="password"
+                   placeholder="Enter Password"
                    required
                    style="
                    width:100%;
@@ -79,7 +72,7 @@ height:80vh;
                     font-size:18px;
                     ">
 
-                Confirm Booking
+                Create Account
 
             </button>
 

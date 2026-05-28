@@ -53,15 +53,30 @@
         }
 
         nav a{
+
             color:white;
+
             text-decoration:none;
+
             margin:20px;
+
             font-size:20px;
+
             font-weight:bold;
+
+            padding:10px 18px;
+
+            border-radius:10px;
+
+            transition:0.3s;
+
+            background:rgba(255,255,255,0.1);
         }
 
         nav a:hover{
-            color:orange;
+
+            background:#eaecec;
+            color:black;
         }
 
         /* PAGE CONTENT */
@@ -78,6 +93,17 @@
             padding:30px;
             border-radius:20px;
             box-shadow:0px 0px 15px rgba(0,0,0,0.5);
+            transition:0.3s;
+            cursor:pointer;
+        }
+        .glass-box:hover{
+            transform:
+            scale(1.05)
+            translateY(-8px);
+            box-shadow:
+            0px 0px 25px rgba(0,229,255,0.8);
+            border:
+            1px solid rgba(255,255,255,0.4);
         }
 
     </style>
@@ -114,6 +140,7 @@
         {% else %}
 
             <a href="/login/">Login</a>
+            <a href="/register/">Register</a>
 
         {% endif %}
 

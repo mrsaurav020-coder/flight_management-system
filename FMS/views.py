@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from urllib import request
 
 from .models import Flight, Booking
@@ -7,8 +8,29 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
 def home(request):
+
+    source = request.GET.get('source')
+
+    destination = request.GET.get('destination')
+
     flights = Flight.objects.all()
-    return render(request, 'home.html', {'flights': flights})
+
+    if source and destination:
+
+        flights = Flight.objects.filter(
+            source__icontains=source,
+            destination__icontains=destination
+        )
+
+    context = {
+
+        'flights': flights
+
+    }
+
+    return render(request,
+                  'home.html',
+                  context)
 
 def book_flight(request, id):
 
@@ -25,6 +47,13 @@ def book_flight(request, id):
 
     if request.method == "POST":
 
+        if flight.available_seats <= 0:
+            messages.error(
+                request,
+                "Flight is full."
+            )
+            return redirect('/')
+
         passenger_name = request.POST['passenger_name']
 
         passenger_email = request.POST['passenger_email']
@@ -39,6 +68,8 @@ def book_flight(request, id):
 
             flight=flight
         )
+        flight.available_seats -= 1
+        flight.save()
 
         return redirect('/history/')
 
@@ -76,6 +107,47 @@ def user_login(request):
             )
 
     return render(request, 'login.html')
+
+def register(request):
+
+    if request.method == "POST":
+
+        username = request.POST['username']
+
+        email = request.POST['email']
+
+        password = request.POST['password']
+
+        # CHECK IF USERNAME EXISTS
+
+        if User.objects.filter(username=username).exists():
+
+            messages.error(
+                request,
+                "Username already exists."
+            )
+
+            return redirect('/register/')
+
+        # CREATE USER
+
+        User.objects.create_user(
+
+            username=username,
+
+            email=email,
+
+            password=password
+        )
+
+        messages.success(
+            request,
+            "Account created successfully."
+        )
+
+        return redirect('/login/')
+
+    return render(request, 'register.html')
 
 @login_required
 def history(request):

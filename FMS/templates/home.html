@@ -2,11 +2,62 @@
 
 {% block content %}
 
-<h1 style="text-align:center; margin-bottom:50px;">
+<h1 style="
+text-align:center;
+margin-bottom:50px;
+font-size:55px;
+color:#f7f7fa;
+font-weight:bold;
+letter-spacing:2px;
+">
 
-    Welcome to Flight Management System
+    Welcome to SkyConnect Airways ✈️
 
 </h1>
+
+<form method="GET"
+      style="
+      text-align:center;
+      margin-bottom:40px;
+      ">
+
+    <input type="text"
+           name="source"
+           placeholder="Enter Source"
+           style="
+           padding:12px;
+           width:220px;
+           border:none;
+           border-radius:10px;
+           margin-right:10px;
+           ">
+
+    <input type="text"
+           name="destination"
+           placeholder="Enter Destination"
+           style="
+           padding:12px;
+           width:220px;
+           border:none;
+           border-radius:10px;
+           margin-right:10px;
+           ">
+
+    <button type="submit"
+            style="
+            padding:12px 20px;
+            border:none;
+            border-radius:10px;
+            background:black;
+            color:white;
+            font-size:16px;
+            ">
+
+        Search Flights
+
+    </button>
+
+</form>
 
 <div style="
 display:flex;
@@ -19,10 +70,18 @@ gap:30px;
 
     <div class="glass-box" style="width:300px; text-align:center;">
 
-        <h2>{{ flight.flight_name }}</h2>
+        <h2 style="
+        color:#070600;
+        font-size:30px;
+        margin-bottom:15px;
+        ">
+
+        {{ flight.flight_name }}
+
+        </h2>
 
         <p>
-            {{ flight.source }} → {{ flight.destination }}
+            {{ flight.source }} to {{ flight.destination }}
         </p>
 
         <p>
@@ -33,6 +92,11 @@ gap:30px;
         <p>
             Arrival:
             {{ flight.arrival_time }}
+        </p>
+
+        <p>
+            Available Seats:            
+            {{ flight.available_seats }}            
         </p>
 
         <p>Price: ₹{{ flight.price }}</p>
