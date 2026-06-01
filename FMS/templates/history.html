@@ -2,57 +2,117 @@
 
 {% block content %}
 
-<h1 style="
-text-align:center;
-margin-bottom:40px;
-">
+<div style="text-align:center; margin-top:30px;">
 
-    My Booking History
+    <h1 style="
+    color:#00e5ff;
+    font-size:45px;
+    margin-bottom:30px;
+    ">
+        Booking History
+    </h1>
 
-</h1>
+    {% if bookings %}
+        {% for booking in bookings %}
 
-<div style="
-display:flex;
-flex-wrap:wrap;
-justify-content:center;
-gap:30px;
-">
+        <div class="glass-box"
+             style="
+             width:500px;
+             margin:20px auto;
+             padding:25px;
+             ">
 
-    {% for booking in bookings %}
+            <h2 style="
+            color:gold;
+            margin-bottom:15px;
+            ">
+                {{ booking.flight.flight_name }}
+            </h2>
 
-    <div class="glass-box"
-         style="
-         width:320px;
-         text-align:center;
-         ">
+            <p style="font-size:20px;">
+                {{ booking.flight.source }}
+                ✈
+                {{ booking.flight.destination }}
+            </p>
 
-        <h2>{{ booking.flight.flight_name }}</h2>
+            <hr>
 
-        <p>
-            {{ booking.flight.source }}
-            →
-            {{ booking.flight.destination }}
-        </p>
+            <p>
+                <strong>Passenger:</strong>
+                {{ booking.passenger_name }}
+            </p>
+            <p>
+                <strong>Email:</strong>
+                {{ booking.passenger_email }}
+            </p>
+            <p>
+                <strong>Travel Date:</strong>
+                {{ booking.travel_date }}
+            </p>
+            <p>
+                <strong>Departure:</strong>
+                {{ booking.flight.departure_time }}
+            </p>
+            <p>
+                <strong>Arrival:</strong>
+                {{ booking.flight.arrival_time }}
+            </p>
+            <p>
+                <strong>Price:</strong>
+                ₹{{ booking.flight.price }}
+            </p>
+            <p style="
+            color:#00e5ff;
+            font-weight:bold;
+            font-size:22px;
+            ">
+                Ticket ID:
+                SKY{{ booking.id }}2025
+            </p>
 
-        <p>
-            Passenger:
-            {{ booking.passenger_name }}
-        </p>
+            <p style="
+            color:#00ff99;
+            font-weight:bold;
+            font-size:18px;
+            ">
+                ✓ Confirmed
+            </p>
+            <p>
+                <strong>Booked On:</strong>
+                {{ booking.booking_date|date:"d M Y" }}
+            </p>
+            
+            <a href="{% url 'download_ticket' booking.id %}"
+               style="
+               display:inline-block;
+               margin-top:15px;
+               padding:12px 25px;
+               background:#00e5ff;
+               color:black;
+               text-decoration:none;
+               border-radius:10px;
+               font-weight:bold;
+               ">
+                📄 Download Ticket
+            </a>
+        </div>
 
-        <p>
-            Email:
-            {{ booking.passenger_email }}
-        </p>
+        {% endfor %}
+    {% else %}
 
-        <p>
-            Price:
-            ₹{{ booking.flight.price }}
-        </p>
-
-    </div>
-
-    {% endfor %}
-
+        <div class="glass-box"
+             style="
+             width:500px;
+             margin:auto;
+             padding:25px;
+             ">
+            <h2 style="color:white;">
+                No Bookings Found
+            </h2>
+            <p>
+                You haven't booked any flights yet.
+            </p>
+        </div>
+    {% endif %}
 </div>
-
 {% endblock %}

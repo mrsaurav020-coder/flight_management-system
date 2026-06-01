@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div style="
+display:flex;
+justify-content:center;
+align-items:center;
+height:80vh;
+">
+
+    <div class="glass-box"
+         style="
+         width:500px;
+         text-align:center;
+         ">
+
+        <h1 style="
+        color:#00ff99;
+        margin-bottom:25px;
+        font-size:45px;
+        ">
+            Booking Confirmed
+        </h1>
+        <div style="
+        display:inline-block;
+        padding:8px 18px;
+        background:#00ff99;
+        color:black;
+        border-radius:20px;
+        font-weight:bold;
+        margin-bottom:20px;
+        ">
+        ✓ CONFIRMED
+        </div>
+
+        <h2 style="
+        color:#ffd700;
+        margin-bottom:20px;
+        font-size:38px;
+        font-weight:bold;
+        ">
+        {{ booking.flight.flight_name }}
+        </h2>
+
+        <p>
+            {{ booking.flight.source }} ✈ {{ booking.flight.destination }}
+        </p>
+        <br>
+
+        <p>
+            Passenger:
+            {{ booking.passenger_name }}
+        </p>
+
+        <p>
+            Email:
+            {{ booking.passenger_email }}
+        </p>
+
+        <p>
+            Departure:
+            {{ booking.flight.departure_time }}
+        </p>
+
+        <p>
+            Arrival:
+            {{ booking.flight.arrival_time }}
+        </p>
+
+        <p>
+            Travel Date:
+            {{ booking.travel_date }}
+        </p>
+
+        <p>
+            Price:
+            Rs.{{ booking.flight.price }}
+        </p>
+
+        <br>
+        <h3 style="color:#00e5ff;">
+            Ticket ID: Sky{{ booking.id }}2025
+        </h3>
+
+        <br>
+        <a href="/history/"
+            style="
+            display:inline-block;
+            width:250px;
+            text-align:center;
+            padding:12px 20px;
+            background:#1e3a8a;
+            color:white;
+            text-decoration:none;
+            border-radius:10px;
+            margin-bottom:15px;
+            ">
+            View Booking History
+            <br><br>
+        <a href="/download-ticket/{{ booking.id }}/"
+            style="
+            display:inline-block;
+            width:250px;
+            text-align:center;
+            padding:12px 20px;
+            background:#00e5ff;
+            color:black;
+            text-decoration:none;
+            border-radius:10px;
+            font-weight:bold;
+            ">
+                Download Ticket PDF
+            </a>
+                    </a>
+                </div>
+            </div>
+
+{% endblock %}

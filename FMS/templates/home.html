@@ -10,9 +10,7 @@ color:#f7f7fa;
 font-weight:bold;
 letter-spacing:2px;
 ">
-
-    Welcome to SkyConnect Airways ✈️
-
+    Welcome to SkyConnect ✈️
 </h1>
 
 <form method="GET"
@@ -20,7 +18,6 @@ letter-spacing:2px;
       text-align:center;
       margin-bottom:40px;
       ">
-
     <input type="text"
            name="source"
            placeholder="Enter Source"
@@ -52,11 +49,8 @@ letter-spacing:2px;
             color:white;
             font-size:16px;
             ">
-
         Search Flights
-
     </button>
-
 </form>
 
 <div style="
@@ -65,19 +59,14 @@ flex-wrap:wrap;
 justify-content:center;
 gap:30px;
 ">
-
     {% for flight in flights %}
-
-    <div class="glass-box" style="width:300px; text-align:center;">
-
+    <div class="glass-box flight-card" style="width:300px; text-align:center;">
         <h2 style="
         color:#070600;
         font-size:30px;
         margin-bottom:15px;
         ">
-
         {{ flight.flight_name }}
-
         </h2>
 
         <p>
@@ -94,12 +83,24 @@ gap:30px;
             {{ flight.arrival_time }}
         </p>
 
-        <p>
-            Available Seats:            
-            {{ flight.available_seats }}            
-        </p>
-
-        <p>Price: ₹{{ flight.price }}</p>
+        {% if flight.available_seats < 10 %}
+            <p style="
+            color:red;
+            font-weight:bold;
+            font-size:20px;
+            ">
+                Seats Left: {{ flight.available_seats }}
+            </p>
+        {% else %}
+            <p style="
+            color:white;
+            font-size:20px;
+            ">
+                Available Seats: {{ flight.available_seats }}
+            </p>
+        {% endif %}
+        
+        <p>Price: Rs.{{ flight.price }}</p>
 
         <a href="/book/{{ flight.id }}/"
            style="

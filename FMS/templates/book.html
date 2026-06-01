@@ -18,15 +18,11 @@ height:80vh;
         text-align:center;
         margin-bottom:30px;
         ">
-
             Book Flight
-
         </h1>
 
         <h2 style="margin-bottom:20px;">
-
             {{ flight.flight_name }}
-
         </h2>
 
         <p>
@@ -34,16 +30,12 @@ height:80vh;
         </p>
 
         <p style="margin-bottom:20px;">
-
             Price:
             ₹{{ flight.price }}
-
         </p>
 
         <form method="POST">
-
             {% csrf_token %}
-
             <input type="text"
                    name="passenger_name"
                    placeholder="Enter Name"
@@ -67,6 +59,20 @@ height:80vh;
                    border:none;
                    border-radius:10px;
                    ">
+            <label style="font-size:18px;">
+             Travel Date
+             </label>
+             <br><br>
+             <input type="date"
+                    name="travel_date"
+                    required
+                    style="
+                    width:100%;
+                    padding:12px;
+                    margin-bottom:20px;
+                    border:none;
+                    border-radius:10px;
+                    ">
 
             <button type="submit"
                     style="
@@ -78,15 +84,10 @@ height:80vh;
                     color:white;
                     font-size:18px;
                     ">
-
                 Confirm Booking
-
             </button>
-
         </form>
-
     </div>
-
 </div>
 
 {% endblock %}
