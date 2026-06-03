@@ -70,18 +70,31 @@
                 SKY{{ booking.id }}2025
             </p>
 
+            {% if booking.status == "Confirmed" %}
             <p style="
             color:#00ff99;
             font-weight:bold;
             font-size:18px;
             ">
-                ✓ Confirmed
+            ✓ Confirmed
+
             </p>
+            {% else %}
+            <p style="
+            color:red;
+            font-weight:bold;
+            font-size:18px;
+            ">
+            ❌ Cancelled
+            </p>
+
+            {% endif %}
             <p>
                 <strong>Booked On:</strong>
                 {{ booking.booking_date|date:"d M Y" }}
             </p>
             
+            {% if booking.status == "Confirmed" %}
             <a href="{% url 'download_ticket' booking.id %}"
                style="
                display:inline-block;
@@ -95,6 +108,26 @@
                ">
                 📄 Download Ticket
             </a>
+            {% endif %}
+
+            {% if booking.status == "Confirmed" %}
+            <br><br>
+            <a href="{% url 'cancel_booking' booking.id %}"
+            onclick="return confirm('Are you sure you want to cancel this booking?')"
+                style="
+                display:inline-block;
+                padding:12px 20px;
+                background:red;
+                color:white;
+                text-decoration:none;
+                border-radius:10px;
+                font-weight:bold;
+                ">
+                Cancel Booking
+
+            </a>
+
+            {% endif %}
         </div>
 
         {% endfor %}

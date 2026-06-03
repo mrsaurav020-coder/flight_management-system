@@ -48,17 +48,22 @@ def book_flight(request, id):
         passenger_name = request.POST['passenger_name']
         passenger_email = request.POST['passenger_email']
         travel_date = request.POST['travel_date']
+        request.session['flight_id'] = flight.id
+        request.session['passenger_name'] = passenger_name
+        request.session['passenger_email'] = passenger_email
+        request.session['travel_date'] = travel_date
+        return redirect('payment')
 
-        booking = Booking.objects.create(
-            user=request.user,
-            passenger_name=passenger_name,
-            passenger_email=passenger_email,
-            travel_date=travel_date,
-            flight=flight
-        )
-        flight.available_seats -= 1
-        flight.save()
-        return redirect(f'/success/{booking.id}/')    
+    #     booking = Booking.objects.create(
+    #         user=request.user,
+    #         passenger_name=passenger_name,
+    #         passenger_email=passenger_email,
+    #         travel_date=travel_date,
+    #         flight=flight
+    #     )
+    #     flight.available_seats -= 1
+    #     flight.save()
+    #     return redirect(f'/success/{booking.id}/')    
     return render(request,'book.html',{'flight': flight})
 
 def user_login(request):
@@ -224,3 +229,33 @@ def download_ticket(request, id):
     p.save()
 
     return response
+
+def payment(request):
+
+    flight_id = request.session.get('flight_id')
+    flight = Flight.objects.get(id=flight_id)
+    if request.method == "POST":
+        passenger_name = request.session.get('passenger_name')
+        passenger_email = request.session.get('passenger_email')
+        travel_date = request.session.get('travel_date')
+        
+        booking = Booking.objects.create(
+            user=request.user,
+            flight=flight,
+            passenger_name=passenger_name,
+            passenger_email=passenger_email,
+            travel_date=travel_date
+        )
+        flight.available_seats -= 1
+        flight.save()
+        return redirect(f'/success/{booking.id}/')
+    return render(request, 'payment.html', {'flight': flight})
+
+def cancel_booking(request, id):
+    booking = Booking.objects.get(id=id)
+    if booking.status == "Confirmed":
+        booking.status = "Cancelled"
+        booking.save()
+        booking.flight.available_seats += 1
+        booking.flight.save()
+    return redirect('history')
