@@ -13,12 +13,17 @@
     </h1>
 
     {% if bookings %}
+        <div style="
+        display:flex;
+        flex-wrap:wrap;
+        justify-content:center;
+        gap:25px;
+        ">
         {% for booking in bookings %}
 
         <div class="glass-box"
              style="
-             width:500px;
-             margin:20px auto;
+             width:350px;
              padding:25px;
              ">
 
@@ -131,7 +136,8 @@
         </div>
 
         {% endfor %}
-    {% else %}
+        </div>
+        {% else %}
 
         <div class="glass-box"
              style="
